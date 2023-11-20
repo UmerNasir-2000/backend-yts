@@ -10,6 +10,16 @@ export class MovieService {
   ) {}
 
   findAll(): Promise<Movie[]> {
-    return this.movieModel.find().exec();
+    return this.movieModel
+      .find()
+      .select({
+        _id: 1,
+        title: 1,
+        slug: 1,
+        medium_cover_image: 1,
+        rating: 1,
+        runtime: 1,
+      })
+      .limit(50);
   }
 }
